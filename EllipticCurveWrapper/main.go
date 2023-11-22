@@ -4,7 +4,7 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	wrapper "github.com/Zaptoss/Cryptography-for-Developers/EllipticCurveWrapper/wrapper"
+	wrapper "EllipticCurveWrapper/wrapper"
 )
 
 func main() {
