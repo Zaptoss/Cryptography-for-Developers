@@ -1,4 +1,4 @@
-package ElipticCurveWrapper
+package EllipticCurveWrapper
 
 import (
 	"crypto/elliptic"
