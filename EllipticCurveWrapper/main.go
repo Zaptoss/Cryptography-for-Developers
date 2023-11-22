@@ -1,7 +1,7 @@
 package main
 
 import (
-	wrapper "ElipticCurveWrapper/wrapper"
+	wrapper "github.com/Zaptoss/Cryptography-for-Developers/EllipticCurveWrapper/wrapper"
 	"crypto/rand"
 	"fmt"
 )
