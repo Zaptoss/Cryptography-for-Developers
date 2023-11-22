@@ -1,4 +1,4 @@
-package EllipticCurveWrapper
+package "github.com/Zaptoss/Cryptography-for-Developers/EllipticCurveWrapper"
 
 import (
 	"crypto/elliptic"
