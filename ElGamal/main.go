@@ -1,20 +1,30 @@
 package main
 
 import (
-	// sign "ElGamal/sign"
 	encrypt "ElGamal/encrypt"
+	sign "ElGamal/sign"
+	"fmt"
 )
 
 func main() {
-	// p, g, a, b := sign.GenKey()
-	// fmt.Printf("p: %s\ng: %s\na: %s\nb: %s\n", p.Text(16), g.Text(16), a.Text(16), b.Text(16))
-	// r, s := sign.Sign("Hello", p, g, a)
-	// fmt.Printf("r: %s\ns: %s\n", r.Text(16), s.Text(16))
-	// if sign.Verify("Hello", p, g, b, r, s) == true {
-	// 	fmt.Println("Success!")
-	// }
-	p, g, a, b := encrypt.GenKey()
-	encrypt.Encrypt([]byte("hello"), p, g, a)
-	// z := encrypt.Decrypt(x, b, p)
-	// fmt.Println(z)
+	p, g, a, b := sign.GenKey()
+
+	r, s := sign.Sign("Hello", p, g, a)
+
+	if sign.Verify("Hello", p, g, b, r, s) == true {
+		fmt.Println("Success!")
+	} else {
+		fmt.Println("Don't verify!")
+	}
+
+	if sign.Verify("Hellou", p, g, b, r, s) == true {
+		fmt.Println("Success!")
+	} else {
+		fmt.Println("Don't verify!")
+	}
+
+	p, g, a, b = encrypt.GenKey()
+	x := encrypt.Encrypt([]byte("It some text with length more then 65 bytes, because alghorithm slice msg by 64 byte blocks"), p, g, b)
+	fmt.Println(string(encrypt.Decrypt(x, a, p)))
+
 }

@@ -3,7 +3,6 @@ package ElGamal
 import (
 	"crypto/rand"
 	"crypto/sha256"
-	"fmt"
 	"math/big"
 )
 
@@ -19,7 +18,6 @@ func GenKey() (p, g, a, b *big.Int) {
 
 		b := new(big.Int).Exp(g, q, p)
 		if b.Cmp(bigOne) == 0 {
-			// fmt.Println("g finded!")
 			break
 		}
 
@@ -55,20 +53,9 @@ func Verify(m string, p, g, b, r, s *big.Int) bool {
 	hash := sha256.Sum256([]byte(m))
 	hashBig := new(big.Int).SetBytes(hash[:])
 
-	// q := new(big.Int).Sub(p, bigOne)
-
-	// y := new(big.Int).ModInverse(b, p)
-	// sr := new(big.Int).ModInverse(s, p)
-	// u1 := new(big.Int).Mod(new(big.Int).Mul(hashBig, sr), q)
-	// u2 := new(big.Int).Mod(new(big.Int).Mul(r, sr), q)
-	// v := new(big.Int).Mod(new(big.Int).Mul(new(big.Int).Exp(g, u1, p), new(big.Int).Exp(y, u2, p)), p)
-	// fmt.Println(r.Text(16))
-	// fmt.Println(v.Text(16))
-
 	u1 := new(big.Int).Mod(new(big.Int).Mul(new(big.Int).Exp(b, r, p), new(big.Int).Exp(r, s, p)), p)
 	u2 := new(big.Int).Exp(g, hashBig, p)
-	fmt.Println(u1.Text(16))
-	fmt.Println(u2.Text(16))
+
 	if u1.Text(16) == u2.Text(16) {
 		return true
 	}
